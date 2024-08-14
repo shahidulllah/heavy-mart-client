@@ -7,7 +7,7 @@ const Navbar = () => {
         <li className="m-1"><NavLink to='/products'>Products</NavLink></li>
     </>
     return (
-        <div className="navbar bg-base-300 lg:px-24 py-4">
+        <div className="navbar bg-base-300 lg:px-24 py-4 sticky top-0 z-30">
             <div className="navbar-start">
                 <div className="dropdown">
                     <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -30,7 +30,7 @@ const Navbar = () => {
                         {navLinks}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-3xl">Heavy Mart</a>
+                <a className="btn btn-ghost text-2xl lg:text-3xl">Heavy Mart</a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -39,7 +39,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-end gap-3 lg:gap-8">
                 <div className="form-control">
-                    <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
+                    <input type="text" placeholder="Search Products" className="input input-bordered w-24 md:w-auto" />
                 </div>
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
