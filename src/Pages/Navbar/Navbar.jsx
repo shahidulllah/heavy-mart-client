@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Navbar = () => {
     const user = false;
@@ -49,14 +49,18 @@ const Navbar = () => {
                             alt="Tailwind CSS Navbar component"
                             src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
                     </div>:
-                    <h1>Login</h1>
+                    <Link to='/login'><h1>Login</h1></Link>
                        }
                     </div>
                     <ul
                         tabIndex={0}
                         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                        <li><a>Login</a></li>
-                        <li><a>Logout</a></li>
+                            {
+                                user? <li><a>Logout</a></li>:
+                               <Link to='/register'><li><a>Register</a></li></Link>
+                            }
+                       
+                       
                     </ul>
                 </div>
             </div>
