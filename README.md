@@ -57,7 +57,7 @@
 
 1. **Clone the Repository**
     ```bash
-    git clone [<repository-link>](https://github.com/shahidulllah/heavy-mart-server)
+    git clone [https://github.com/shahidulllah/heavy-mart-server]
     cd heavy-mart-backend
     ```
 
