@@ -10,7 +10,7 @@ const Card = ({product}) => {
                 <div className="flex flex-col justify-between p-6 space-y-8">
                     <div className="space-y-2">
                         <div className="flex justify-between items-center">
-                        <h2 className="text-2xl font-semibold tracking-wide">{product?.productName}</h2>
+                        <h2 className="text-xl font-semibold tracking-wide">{product?.productName}</h2>
                         <h4>Price: <span>$</span> {product?.price}</h4>
                         </div>
                         <p className="text-gray-100">{product?.description}</p>

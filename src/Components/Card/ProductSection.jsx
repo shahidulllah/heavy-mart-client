@@ -4,11 +4,11 @@ import { useLoaderData } from "react-router-dom";
 
 
 const ProductSection = () => {
-    const [products, setproduct] = useState([]);
-    // const [totalProducts, setTotalProducts] = useState(0);
+    const [products, setProduct] = useState([]);
     const [productPerPage, setProductPerPage] = useState(10);
     const [currentPage, setCurrentPage] = useState(0);
-    const {count} = useLoaderData();
+    const { count } = useLoaderData();
+   
 
     const numberOfPages = Math.ceil(count / productPerPage);
     const pages = [...Array(numberOfPages).keys()];
@@ -17,37 +17,41 @@ const ProductSection = () => {
         fetch(`http://localhost:5000/products?page=${currentPage}&size=${productPerPage}`)
             .then(res => res.json())
             .then(data => {
-                setproduct(data)
+                setProduct(data)
 
             })
     }, [currentPage, productPerPage])
 
-  
 
-    
-    const handleProductPerPage = e =>{
+
+
+    const handleProductPerPage = e => {
         const intPage = parseInt(e.target.value);
         setProductPerPage(intPage);
         setCurrentPage(0);
     }
-    const handlePreviousPage = () =>{
-        if(currentPage > 0){
-            setCurrentPage(currentPage -1);
+    const handlePreviousPage = () => {
+        if (currentPage > 0) {
+            setCurrentPage(currentPage - 1);
         }
     }
 
-    const handleNextPage = () =>{
-        if(currentPage < numberOfPages -1){
+    const handleNextPage = () => {
+        if (currentPage < numberOfPages - 1) {
             setCurrentPage(currentPage + 1);
         }
     }
+    // =====================================
+    // ====================================
+
 
     return (
         <div className="px-4 lg:mx-24">
             <div className="flex flex-col items-center justify-center p-16 pb-12 pt-16 space-y-5">
-                <h1 className="text-4xl lg:text-5xl font-bold text-center">All Products</h1>
+                <h1 className="text-3xl lg:text-4xl font-bold text-center">All Products</h1>
                 <p className="text-center lg:w-4/12">Most interesting part to have the fresh mind by keeping our product. Art and Craft is the way to live and refresh your mind.</p>
             </div>
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
                 {
                     products.map(product => <Card key={product._id} product={product}></Card>)
