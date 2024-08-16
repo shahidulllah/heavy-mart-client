@@ -9,13 +9,14 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
     const [products, setProduct] = useState([]);
-    const [display, setDisplay] = useState(products)
+    const [display, setDisplay] = useState([])
 
     useEffect(() => {
         fetch('http://localhost:5000/products')
             .then(res => res.json())
             .then(data => {
                 setProduct(data)
+                setDisplay(data)
             })
     }, [])
 
