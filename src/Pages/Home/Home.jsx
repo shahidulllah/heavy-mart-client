@@ -11,7 +11,9 @@ const Home = () => {
     const [products, setProduct] = useState([]);
     const [display, setDisplay] = useState([]);
     const [search, setSearch] = useState('');
-   
+    const [sortOption, setSortOption] = useState('');
+    console.log(sortOption);
+
 
     useEffect(() => {
         fetch('http://localhost:5000/products')
@@ -53,6 +55,25 @@ const Home = () => {
         }
 
     }
+
+
+     // Sorting Section
+     const handleSort = e => {
+        const option = e.target.value;
+        setSortOption(option);
+
+        const sortedProducts = [...display];
+
+        if (option === "price-low-high") {
+            sortedProducts.sort((a, b) => a.price - b.price);
+        } else if (option === "price-high-low") {
+            sortedProducts.sort((a, b) => b.price - a.price);
+        } else if (option === "date-newest") {
+            sortedProducts.sort((a, b) => new Date(b.creationDate) - new Date(a.creationDate));
+        }
+
+        setDisplay(sortedProducts);
+    };
     return (
         <div>
             <Banner></Banner>
@@ -62,7 +83,7 @@ const Home = () => {
                     <p className="text-center lg:w-4/12">Most interesting part to have the fresh mind by keeping our product. Art and Craft is the way to live and refresh your mind.</p>
                 </div>
                 {/* sm */}
-                <div className="flex justify-between pb-7">
+                <div className="grid grid-cols-1 lg:flex lg:justify-around gap-2  pb-7">
                     <div>
                         <label className="input input-bordered flex items-center gap-2">
                             <input onChange={(e) => setSearch(e.target.value)} type="text" className="grow" placeholder="Search Products" />
@@ -77,6 +98,14 @@ const Home = () => {
                                     clipRule="evenodd" />
                             </svg>
                         </label>
+                    </div>
+                    <div>
+                        <select onChange={handleSort} className="select select-bordered select-xl w-full max-w-xs">
+                            <option disabled selected>Sort Products</option>
+                            <option value='price-low-high'>Price: Low to High</option>
+                            <option value='price-high-low'>Price: High to Low</option>
+                            <option value='date-newest'>Date Added: Newest First</option>
+                        </select>
                     </div>
                     <div>
                         <select onChange={handleFilter} className="select select-bordered select-xl w-full max-w-xs">
