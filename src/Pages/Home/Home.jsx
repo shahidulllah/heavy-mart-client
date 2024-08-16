@@ -9,14 +9,17 @@ import { Link } from "react-router-dom";
 
 const Home = () => {
     const [products, setProduct] = useState([]);
-    const [display, setDisplay] = useState([])
+    const [display, setDisplay] = useState([]);
+    const [search, setSearch] = useState('');
+   
 
     useEffect(() => {
         fetch('http://localhost:5000/products')
             .then(res => res.json())
             .then(data => {
                 setProduct(data)
-                setDisplay(data)
+                const fewData = data.slice(0, 9);
+                setDisplay(fewData)
             })
     }, [])
 
@@ -24,7 +27,7 @@ const Home = () => {
     const handleFilter = e => {
         const category = e.target.value;
 
-         if (category === "Accessories") {
+        if (category === "Accessories") {
             const Accessories = products.filter(a => a.category === "Accessories");
             setDisplay(Accessories);
         }
@@ -48,7 +51,7 @@ const Home = () => {
             const HomeAppliances = products.filter(a => a.category === "Home Appliances");
             setDisplay(HomeAppliances);
         }
-        
+
     }
     return (
         <div>
@@ -58,22 +61,40 @@ const Home = () => {
                     <h1 className="text-3xl lg:text-4xl font-bold text-center">Our Exclusive Products</h1>
                     <p className="text-center lg:w-4/12">Most interesting part to have the fresh mind by keeping our product. Art and Craft is the way to live and refresh your mind.</p>
                 </div>
-                 {/* sm */}
-            <div className="flex justify-end pb-7">
-                <select onChange={handleFilter} className="select select-bordered select-sm w-full max-w-xs">
-                    
-                    <option disabled selected>Filter Products by Category</option>
-                    <option value='Accessories'>Accessories</option>
-                    <option value='Electronics'>Electronics</option>
-                    <option value='Furniture'>Furniture</option>
-                    <option value='Home Appliances'>Home Appliances</option>
-                    <option value='Personal Care'>Personal Care</option>
-                    <option value='Footwear'>Footwear</option>
-                </select>
-            </div>
+                {/* sm */}
+                <div className="flex justify-between pb-7">
+                    <div>
+                        <label className="input input-bordered flex items-center gap-2">
+                            <input onChange={(e) => setSearch(e.target.value)} type="text" className="grow" placeholder="Search Products" />
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 16 16"
+                                fill="currentColor"
+                                className="h-4 w-4 opacity-70">
+                                <path
+                                    fillRule="evenodd"
+                                    d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                                    clipRule="evenodd" />
+                            </svg>
+                        </label>
+                    </div>
+                    <div>
+                        <select onChange={handleFilter} className="select select-bordered select-xl w-full max-w-xs">
+                            <option disabled selected>Filter Products by Category</option>
+                            <option value='Accessories'>Accessories</option>
+                            <option value='Electronics'>Electronics</option>
+                            <option value='Furniture'>Furniture</option>
+                            <option value='Home Appliances'>Home Appliances</option>
+                            <option value='Personal Care'>Personal Care</option>
+                            <option value='Footwear'>Footwear</option>
+                        </select>
+                    </div>
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16">
                     {
-                        display.map(product => <div key={product._id} className="max-w-full rounded-md shadow-2xl shadow-violet-400 bg-gray-700 text-gray-100">
+                        display.filter((item) => {
+                            return search.toLowerCase() === '' ? item : item.productName.toLowerCase().includes(search)
+                        }).map(product => <div key={product._id} className="max-w-full rounded-md shadow-2xl shadow-violet-400 bg-gray-700 text-gray-100">
                             <img src={product?.image} alt="" className=" object-center w-full rounded-t-md h-72 bg-gray-500 p-3" />
                             <div className="flex flex-col justify-between p-6 space-y-8">
                                 <div className="space-y-2">
