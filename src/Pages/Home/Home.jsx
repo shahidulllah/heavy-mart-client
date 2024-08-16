@@ -1,5 +1,5 @@
 
-import ProductSection from "../../Components/Card/ProductSection";
+// import ProductSection from "../../Components/Card/ProductSection";
 import Banner from "./Banner";
 
 
@@ -7,9 +7,9 @@ const Home = () => {
     return (
         <div>
             <Banner></Banner>
-            <div>
+            {/* <div>
                 <ProductSection></ProductSection>
-            </div>
+            </div> */}
         </div>
     );
 };
