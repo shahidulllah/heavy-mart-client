@@ -47,9 +47,7 @@ const handleLogOut = () => {
                 </ul>
             </div>
             <div className="navbar-end gap-3 lg:gap-8">
-                <div className="form-control">
-                    <input type="text" placeholder="Search Products" className="input input-bordered w-24 md:w-auto" />
-                </div>
+                
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                        {
@@ -58,7 +56,7 @@ const handleLogOut = () => {
                             alt="User profile image"
                             src={user?.photoURL} />
                     </div>:
-                    <Link to='/login'><h1>Login</h1></Link>
+                    <Link to='/login'><h1 className="font-bold">Login</h1></Link>
                        }
                     </div>
                     <ul
