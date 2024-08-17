@@ -14,7 +14,7 @@ const ProductSection = () => {
     const pages = [...Array(numberOfPages).keys()];
 
     useEffect(() => {
-        fetch(`http://localhost:5000/products?page=${currentPage}&size=${productPerPage}`)
+        fetch(`https://heavy-mart-server.vercel.app/products?page=${currentPage}&size=${productPerPage}`)
             .then(res => res.json())
             .then(data => {
                 setProduct(data)

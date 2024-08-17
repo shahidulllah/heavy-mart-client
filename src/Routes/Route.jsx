@@ -30,12 +30,12 @@ export const router = createBrowserRouter([
             {
                 path: "/details/:id",
                 element: <PrivateRoute><Details></Details></PrivateRoute>,
-                loader: ({params}) => fetch(`http://localhost:5000/products/${params.id}`),
+                loader: ({params}) => fetch(`https://heavy-mart-server.vercel.app/products/${params.id}`),
             },
             {
                 path: "/product",
                 element: <ProductSection></ProductSection>,
-                loader: () => fetch('http://localhost:5000/productsCount')
+                loader: () => fetch('https://heavy-mart-server.vercel.app/productsCount')
             },
         ]
         
